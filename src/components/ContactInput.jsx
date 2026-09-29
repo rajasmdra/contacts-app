@@ -62,12 +62,14 @@ class ContactInput extends React.Component {
                     placeholder="Nama"
                     value={this.state.name}
                     onChange={this.onNameChangeEventHandler}
+                    required
                 />
                 <input 
                     type="text" 
                     placeholder="Tag"
                     value={this.state.tag}
                     onChange={this.onTagChangeEventHandler}
+                    required
                 />
                 <button type="submit">Tambah</button>
             </form>
