@@ -1,7 +1,16 @@
+import Joi from "joi";
 import PropTypes from "prop-types";
 import React from "react";
+import { validateProps } from "../utils/validation";
 
-function ContactItemImage({ imageUrl }) {
+const contactItemImagePropsSchema = Joi.object({
+    imageUrl: Joi.string().required()
+})
+
+function ContactItemImage(props) {
+    const validatedProps = validateProps(contactItemImagePropsSchema, props, 'ContactItemImage')
+    const { imageUrl } = validatedProps
+
     return (
         <div className="contact-item__image">
             <img src={imageUrl} alt="contact avatar" />
@@ -9,8 +18,8 @@ function ContactItemImage({ imageUrl }) {
     );
 }
 
-ContactItemImage.propTypes = {
-    imageUrl: PropTypes.string.isRequired
-}
+// ContactItemImage.propTypes = {
+//     imageUrl: PropTypes.string.isRequired
+// }
 
 export default ContactItemImage;

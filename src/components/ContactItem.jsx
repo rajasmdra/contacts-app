@@ -3,8 +3,22 @@ import ContactItemBody from "./ContactItemBody";
 import ContactItemImage from "./ContactItemImage";
 import DeleteButton from "./DeleteButton";
 import PropTypes from "prop-types";
+import Joi from "joi";
+import { validateProps } from "../utils/validation";
 
-function ContactItem({ imageUrl, name, tag, id, onDelete }) {
+const contactItemPropsSchema = Joi.object({
+    imageUrl: Joi.string().required(),
+    name: Joi.string().required(),
+    tag: Joi.string().required(),
+    id: Joi.number().required(),
+    onDelete: Joi.function().required(),
+})
+
+function ContactItem(props) {
+    
+    const validatedProps = validateProps(contactItemPropsSchema, props, 'ContactItem')
+    const { imageUrl, name, tag, id, onDelete } = validatedProps
+    
     return (
         <div className="contact-item">
             <div className="contact-info">
@@ -16,12 +30,12 @@ function ContactItem({ imageUrl, name, tag, id, onDelete }) {
     )
 }
 
-ContactItem.propTypes = {
-    imageUrl: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    tag: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    onDelete: PropTypes.func.isRequired,
-}
+// ContactItem.propTypes = {
+//     imageUrl: PropTypes.string.isRequired,
+//     name: PropTypes.string.isRequired,
+//     tag: PropTypes.string.isRequired,
+//     id: PropTypes.number.isRequired,
+//     onDelete: PropTypes.func.isRequired,
+// }
 
 export default ContactItem;
