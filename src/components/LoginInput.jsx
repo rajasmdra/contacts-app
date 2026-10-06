@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 class LoginInput extends React.Component {
-    contructor(props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -32,7 +32,7 @@ class LoginInput extends React.Component {
     }
 
     onSubmitHandler(event) {
-        event.preventDeafult();
+        event.preventDefault();
 
         this.props.login({
             email: this.state.email,
@@ -58,6 +58,7 @@ class LoginInput extends React.Component {
                     value={this.state.password}
                     onChange={this.onPasswordChangeHandler}
                 />
+                <button type="submit">Masuk</button>
             </form>
         )
     }
