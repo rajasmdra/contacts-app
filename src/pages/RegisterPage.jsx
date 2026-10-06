@@ -4,8 +4,13 @@ import RegisterInput from "../components/RegisterInput";
 import { register } from "../utils/api";
 
 function RegisterPage() {
+    const navigate = useNavigate();
+
     async function onRegisterHandler(user) {
-        await register(user);
+        const { error } = await register(user);
+        if (!error) {
+            navigate('/');
+        }
     }
 
     return (
