@@ -3,23 +3,51 @@ import { Route, Routes } from "react-router-dom";
 import Navigation from "./Navigation";
 import AddPage from "../pages/AddPage";
 import HomePage from "../pages/HomePage";
+import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
 
+class ContactApp extends React.Component {
+    constructor(props) {
+        super(props);
 
-function ContactApp() {
-    return (
-        <div className="contact-app">
-            <header className="contact-app__header">
-                <h1>Aplikasi Kontak</h1>
-                <Navigation />
-            </header>
-            <main>
-                <Routes>
-                    <Route path="/" element={<HomePage />}></Route>
-                    <Route path="/add" element={<AddPage />}></Route>
-                </Routes>
-            </main>
-        </div>
-    )
+        this.state = {
+            authedUser: null,
+        };
+    }
+    
+    render() {
+        if (this.state.authedUser === null) {
+            return (
+                <div className="contact-app">
+                    <header className="contact-app__header">
+                        <h1>Aplikasi Kontak</h1>
+                        <Navigation />
+                    </header>
+                    <main>
+                        <Routes>
+                            <Route path="/*" element={<LoginPage />} />
+                            <Route path="/register" element={<RegisterPage />} />
+                        </Routes>
+                    </main>
+                </div>
+            );
+        }
+
+        return (
+            <div className="contact-app">
+                <header className="contact-app__header">
+                    <h1>Aplikasi Kontak</h1>
+                    <Navigation />
+                </header>
+                <main>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/add" element={<AddPage />} />
+                    </Routes>
+                </main>
+            </div>
+        );
+    }
 }
 
 export default ContactApp;
