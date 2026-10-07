@@ -2,7 +2,7 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import ContactList from "../components/ContactList";
 import SearchBar from "../components/SearchBar";
-import { getContacts } from '../utils/api';
+import { deleteContact, getContacts } from '../utils/api';
 
 function HomePageWrapper() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -38,12 +38,13 @@ class HomePage extends React.Component {
         })
     }
 
-    onDeleteHandler(id) {
-        deleteContact(id);
-
+    async onDeleteHandler(id) {
+        await deleteContact(id);
+        
+        const { data } = await getContacts();
         this.setState(() => {
             return {
-                contacts: getContacts()
+                contacts: data,
             }
         })
     }
